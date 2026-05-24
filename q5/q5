@@ -1,0 +1,5 @@
+5. Password Strength + Hash Storage (Upgrade your question)
+Enhance your existing password question:
+Store password as SHA-256 hash
+Compare login input with stored hash
+

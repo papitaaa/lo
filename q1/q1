@@ -1,0 +1,7 @@
+1. Port Scanner (Enhanced)
+Write a Python script that:
+Accepts a hostname/IP
+Scans ports 1–1024
+Displays only open ports with service name
+ Concepts: sockets, networking, basic recon
+

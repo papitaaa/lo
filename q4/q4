@@ -1,0 +1,7 @@
+4. DNS Resolver Tool
+Write a Python program that:
+Accepts a domain name
+Displays:
+IP address
+Reverse DNS (if available)
+

@@ -1,0 +1,8 @@
+2. Log Analyzer (Security + OS)
+Write a Python program that:
+Reads an Apache/Nginx log file
+Finds:
+Total requests
+Number of 404 errors
+Top 3 IP addresses
+
