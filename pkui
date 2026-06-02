@@ -1,0 +1,84 @@
+this is pki help file
+
+sudo apt update
+sudo apt install openssl
+openssl version
+
+            1. symmetric key AES 
+#openssl enc -aes-256-cbc -in plaintext.txt -out encrypted.txt -pass pass:mysecret
+
+#openssl enc -d -aes-256-cbc -in encrypted.txt -out decrypted.txt -pass pass:mysecret
+
+#diff plaintext.txt decrypted.txt
+
+           2. symmetric key AES-generate a ranmdom key
+#openssl    rand    -out     secret.key    32
+#openssl   rand   -out   iv.bin   16
+#xxd   -p   secret.key
+#xxd   -p   iv.bin
+#openssl    enc    -aes-256-cbc    -in    message.txt    -out message.txt.enc      -K    $(xxd -p secret.key | tr  -d   '\n’)   -iv   $(xxd   -p   iv.bin | tr   -d    '\n’)
+#openssl    enc    -aes-256-cbc    -d  -in    message.txt.enc    -out decrypted.txt     -K    $(xxd -p secret.key | tr  -d   '\n’)   -iv   $(xxd   -p   iv.bin | tr   -d    '\n')
+        
+           AES ALGO SYMMETRIC without initial vector generate a random key
+#openssl    rand    -out     secret.key    32
+#openssl   enc    -aes-256-cbc   -in plaintext.txt    -out encrypted.txt   -pass file:secret.key
+#openssl   enc    -d    -aes-256-cbc   -in encrypted.txt  -out decrypted.txt   -pass file:secret.key
+
+              3 PBKDF2 AES
+#openssl enc -aes-256-cbc -in plaintext.txt -out encrypted.txt -pass pass:mysecret -pbkdf2
+#openssl enc -d -aes-256-cbc -in encrypted.txt -out decrypted.txt -pass pass:mysecret -pbkdf2
+      
+              4 symmetric DES 3
+#openssl enc -des-ede3-cbc -pbkdf2 -in plaintext.txt -out encrypted.txt
+#openssl enc -des-ede3-cbc -pbkdf2 -d -in encrypted.txt -out decrypted.txt 
+
+             5 RSA assymetric
+#openssl genpkey -algorithm RSA -out bank_pri.pem -pkeyopt rsa_keygen_bits:2048
+#openssl rsa -pubout -in bank_pri.pem -out bank_pub.pem
+#openssl genpkey -algorithm RSA -out acc1_pri.pem -pkeyopt rsa_keygen_bits:2048
+#openssl rsa -pubout -in acc1_pri.pem -out acc1_pub.pem
+#openssl pkeyutl -encrypt -pubin -inkey bank_pub.pem -in acc1_message.txt -out acc1_encrypted.txt
+#openssl pkeyutl -decrypt -inkey bank_pri.pem -in acc1_encrypted.txt -out acc1_decrypted.txt
+#diff acc1_encrypted.txt acc1_encrypted.txt 
+#openssl pkeyutl -encrypt -pubin -inkey acc1_pub.pem -in bank_reply_to_acc1.txt -out encrypted_reply.txt
+#openssl pkeyutl -decrypt -inkey acc1_pri.pem -in encrypted_reply.txt -out decrypted_reply.txt
+#sha256sum encrypted_reply.txt decrypted_reply.txt 
+
+          
+                 6 HASH a file
+sender#openssl   dgst   -sha256   -out   hash1.txt   myfile.txt
+
+receiver#openssl   dgst   -sha256   -out   hash2.txt   myfile.txt
+
+check#diff    hash1.txt     hash2.txt
+
+                  7 RSA sign and verify       
+Generate private key file:
+#openssl genpkey -algorithm RSA -out keyfile.pem -aes256
+   
+Derive public key from the private key:
+#openssl rsa -in keyfile.pem -pubout -out public_key.pem
+
+Digital signature
+#openssl dgst -sha256 -sign keyfile.pem -out file1.txt.sha256.sig file1.txt
+
+Verify signature
+#openssl dgst -sha256 -verify public_key.pem -signature file1.txt.sha256.sig
+file1.txt
+
+                         8. DSA: Sign and Verify
+
+Generate DSA parameters
+#openssl dsaparam -out dsaparam.pem 2048
+
+Generate DSA private key
+#openssl gendsa -out private_dsa.pem dsaparam.pem
+
+Extract public key
+#openssl dsa -in private_dsa.pem -pubout -out public_dsa.pem
+
+Sign the message
+#openssl dgst -sha256 -sign private_dsa.pem -out signature.bin message.txt
+
+Verify the signature
+#openssl dgst -sha256 -verify public_dsa.pem -signature signature.bin message.txt

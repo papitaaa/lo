@@ -1,5 +1,0 @@
-9. Failed Login Alert
-Write a Bash script that:
-Parses /var/log/auth.log
-Displays last 10 failed login attempts
-
