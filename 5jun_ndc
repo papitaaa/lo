@@ -1,0 +1,171 @@
+    1  ip -br a
+    2  exit'
+    3  exit
+    4  sudo systemctl status iptables.service 
+    5  ip -br a
+    6  sudo yum install ipset -y
+    7  which ipset
+    8  systemctl status ipset
+    9  ip -br a
+   10  hostname -I
+   11  iptables-L
+   12  iptables -L
+   13  sudo iptables -l
+   14  sudo iptables -L
+   15  sudo ipset list
+   16  sudo ipset create list1 hash:ip
+   17  sudo ipset list
+   18  sudo ipset -h
+   19  sudo ipset list
+   20  sudo ipset add list1 192.168.74.65
+   21  sudo iptables list
+   22  sudo ipset list
+   23  sudo ipset list list1 
+   24  sudo iptables -L INPUT 
+   25  sudo iptables -I INPUT 1 -p icmp --icmp-type echo-request -m set --match-set list1 src -j DROP 
+   26  sudo ipset add list1 192.168.74.93
+   27  sudo ipset list list1
+   28  sudo ipset add list1 192.168.74.249
+   29  sudo ipset list list1
+   30  Now the IPs are added
+   31  sudo ipset del list1 192.168.74.249
+   32  ipset list list1
+   33  sudo ipset list list1
+   34  sudo iptables _L
+   35  sudo iptables -L
+   36  sudo iptables -D INPUT 1
+   37  sudo ipset list
+   38  sudo iptables destroy list1
+   39  sudo ipset destroy list1
+   40  sudo ipset list
+   41  empty
+   42  sudo iptables -L
+   43  sudo ipset create block_icmp_set
+   44  sudo ipset list
+   45  sudo ipset create block_icmp_set hash:ip
+   46  sudo ipset list
+   47  sudo iptables -L INPUT 
+   48  sudo iptables -I INPUT 1 -m set --match-set block_icmp_set src -j DROP
+   49  sudo iptables -L INPUT
+   50  sudo iptables -I INPUT 2 -p icmp --icmp-type=echo-request -j SET --add-set block_icmp_set src
+   51  sudo ipset list block_icmp_set
+   52  No Members Added here
+   53  i am pinging from windows
+   54  sudo ipset list block_icmp_set
+   55  hostname -I
+   56  sudo ipset list block_icmp_set
+   57  sudo ipset destroy block_icmp_set
+   58  sudo iptables -L
+   59  sudo iptables -D INPUT 2
+   60  sudo iptables -D INPUT 1
+   61  sudo ipset destroy block_icmp_set
+   62  sudo ipset create block_icmp_set hash:ip timeout 180 
+   63  sudo ipset list
+   64  hostname -I
+   65  sudo ipset list
+   66  sudo iptables - I INPUT 1 -m set --match-set block_icmp_set src -j DROP 
+   67  sudo iptables -I INPUT 1 -m set --match-set block_icmp_set src -j DROP 
+   68  sudo iptables -I INPUT 2 -p icmp --icmp-type echo-request -j SET --add-set block_icmp_set src
+   69  sudo ipset list block_icmp_set
+   70  sudo iptables -L INPUT
+   71  sudo iptables -P INPUT 1 -p icmp --icmp-type=exho-request -m SET --match-set block_icmp_set src -i DROP
+   72  sudo iptables -R INPUT 1 -p icmp --icmp-type=exho-request -m SET --match-set block_icmp_set src -i DROP
+   73  sudo iptables -R INPUT 1 -p icmp --icmp-type=echo-request -m SET --match-set block_icmp_set src -i DROP
+   74  sudo iptables -R INPUT 1 -p icmp --icmp-type=echo-request -m set --match-set block_icmp_set src -i DROP
+   75  sudo ipset list
+   76  sudo ipset test block_icmp_set 192.168.74.2
+   77  sudo ipset test block_icmp_set 192.168.74.249
+   78  sudo ipset -L list
+   79  sudo ipset list
+   80  hostname -I
+   81  sudo ipset list
+   82  sudo ipset test block_icmp_set 192.168.74.65
+   83  sudo iptables -L INPUT
+   84  sudo systemctl  reload iptables
+   85  sudo iptables -L INPUT
+   86* sudo ipset destroy bloc
+   87  sudo ipset list
+   88  sudo ipset destroy block_icmp_set
+   89  sudo ipset list
+   90  ping 192.168.25.254
+   91  ip -br a
+   92  sudo ipset create ssh_blacklist hash:ip timeout 120
+   93  # Drop packets from IPs already in blacklist
+   94  sudo iptables -I INPUT -m set --match-set ssh_blacklist src -j DROP
+   95  # Detect SSH attempts on WAN IP and add source IP to blacklist
+   96  sudo iptables -I INPUT -p tcp -d 192.168.74.0/24 --dport 22 -m set --set --add-set ssh_blacklist src -j DROP
+   97  sudo iptables -I INPUT -m set --match-set ssh_blacklist src -j DROP
+   98  sudo iptables -I INPUT -p tcp -d 192.168.74.0/24 --dport 22 -m set --set --add-set ssh_blacklist src -j DROP
+   99  sudo yum install httpd -y
+  100  sudo ipset list
+  101  sudo ipset destroy ssh_blacklist
+  102  sudo systemctl reload iptables
+  103  sudo ipset destroy ssh_blacklist
+  104  sudo yum install httpd -y
+  105  sudo vim /var/www/html/index.html 
+  106  systemctl start httpd
+  107  sudo iptables -I INPUT 1 -p tcp 
+  108  sudo systemctl reload iptables
+  109  wget https://www.ipdeny.com/ipblocks/data/countries/all-zones.tar.gz
+  110  ls
+  111  tar -xzvf all-zones.tar.gz 
+  112  ls
+  113  mkdir zomes
+  114  mv *.zones ./zomes/
+  115  mv *.zone ./zomes/
+  116  ls
+  117  cat zomes/
+  118  cd zomes/
+  119  ls
+  120  sudo ipset create block_pk hash:ip
+  121  ls | grep 'pk.*'
+  122  vim pk.zone 
+  123  vim in.zone 
+  124  cat in.zone | grep "192.*"
+  125  cat in.zone | grep "192.168.*"
+  126  cat * | grep "192.168.*"
+  127  ls
+  128  cat pk.zone | less
+  129  sudo ipsel list
+  130  sudo ipset list
+  131  sudo ipset block_pk
+  132  sudo ipset destroy  block_pk
+  133  sudo ipset list
+  134  sido ipset create test1 hash:ip
+  135  sudo ipset create test1 hash:ip
+  136  while IFS= read -r line;do sudo ipset add test1 $line done < pk.zone 
+  137  vim modify-set.sh
+  138  chmod 700 modify-set.sh 
+  139  ls
+  140  bash modify-set.sh 
+  141  sudo ipset create test2 hash:ip maxelem 20000000
+  142  cp modify-set.sh modify-set2.sh 
+  143  vim modify-set2.sh 
+  144  bash modify-set2.sh 
+  145  vim modify-set.sh 
+  146  vim modify-set2.sh 
+  147  sudo ipset create test2 hash:ip maxelem 20000000
+  148  sudo ipset destroy test2
+  149  sudo ipset create test2 hash:ip maxelem 20000000
+  150  vim modify-set2.sh 
+  151  bash modify-set2.sh 
+  152  suo ipset destroy test2
+  153  sudo ipset destroy test2
+  154  sudo ipset create test2 hash:ip #maxelem 20000000
+  155  bash modify-set2.sh 
+  156  suo ipset destroy test2
+  157  sudo ipset destroy test2
+  158  sudo ipset list
+  159  sudo ipset destroy test2
+  160  sudo ipset destroy test1
+  161  sudo ipset destroy test2
+  162  sudo ipset list 
+  163  sudo ipset create test2 hash:ip maxelem 200000000000
+  164  sudo ipset create test2 hash:ip maxelem 2000000000
+  165  bash modify-set2.sh 
+  166  sudo ipset list
+  167  sudo iptables -I INPUT 1 -m set --match-set test2 src -j DROP 
+  168  sudo systemctl reload iptables.service avahi-daemon.service
+  169  sudo iptables -I INPUT 1 -p tcp --dport=22 -m recent --set name=SSH_block_list
+  170  history
+  171  history > 5jun_ndc
